@@ -434,7 +434,7 @@ function AnnaCafePage() {
               ].map(([label, id]) => (
                 <button
                   key={id}
-                  onClick={() => scrollTo(id)}
+                  onClick={() => scrollTo(id!)}
                   className="relative text-[11px] font-semibold uppercase tracking-[0.12em] text-[#3B2218]/70 transition-colors hover:text-[#C98B4B]"
                 >
                   {label}
@@ -476,7 +476,7 @@ function AnnaCafePage() {
                 ].map(([label, id]) => (
                   <button
                     key={id}
-                    onClick={() => scrollTo(id)}
+                    onClick={() => scrollTo(id!)}
                     className="border-b border-[#3B2218]/7 py-4 text-left text-sm font-medium"
                   >
                     {label}
@@ -952,17 +952,17 @@ function AnnaCafePage() {
                     </div>
 
                     <p className="mt-8 font-serif text-2xl leading-relaxed text-[#FFF8F0] sm:text-4xl">
-                      “{reviews[reviewIndex].text}”
+                      “{reviews[reviewIndex]!.text}”
                     </p>
 
                     <div className="mt-8">
                       <p className="text-sm font-semibold text-white/90">
-                        {reviews[reviewIndex].author}
+                        {reviews[reviewIndex]!.author}
                       </p>
 
-                      {reviews[reviewIndex].detail && (
+                      {reviews[reviewIndex]!.detail && (
                         <p className="mt-1 text-[9px] uppercase tracking-[.2em] text-[#C98B4B]">
-                          {reviews[reviewIndex].detail}
+                          {reviews[reviewIndex]!.detail}
                         </p>
                       )}
                     </div>
@@ -1224,7 +1224,7 @@ function AnnaCafePage() {
                   ].map(([label, id]) => (
                     <button
                       key={id}
-                      onClick={() => scrollTo(id)}
+                      onClick={() => scrollTo(id!)}
                       className="text-left text-sm text-white/50 transition hover:text-white"
                     >
                       {label}
@@ -1268,8 +1268,8 @@ function AnnaCafePage() {
             </button>
 
             <img
-              src={images[lightbox].src}
-              alt={images[lightbox].alt}
+              src={images[lightbox]!.src}
+              alt={images[lightbox]!.alt}
               className="max-h-[85vh] max-w-[92vw] rounded-[28px] object-contain shadow-2xl"
               onClick={(event) => event.stopPropagation()}
             />
