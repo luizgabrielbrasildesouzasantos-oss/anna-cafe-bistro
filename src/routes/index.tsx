@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ArrowDown,
   ArrowRight,
-  CalendarDays,
   ChevronLeft,
   ChevronRight,
   Clock3,
@@ -16,10 +14,9 @@ import {
   MessageCircle,
   Navigation,
   Quote,
+  ShoppingBag,
   Star,
-  Utensils,
   X,
-  ChevronDown,
 } from "lucide-react";
 import {
   useEffect,
@@ -33,7 +30,9 @@ export const Route = createFileRoute("/")({
   component: AnnaCafePage,
   head: () => ({
     meta: [
-      { title: "Anna Café Bistro — by Chocolatum | Belo Horizonte" },
+      {
+        title: "Anna Café Bistro — by Chocolatum | Belo Horizonte",
+      },
       {
         name: "description",
         content:
@@ -48,7 +47,10 @@ export const Route = createFileRoute("/")({
         content:
           "Sabores que abraçam, doces que ficam na memória. Confeitaria, café e bistrô no Prado.",
       },
-      { property: "og:type", content: "website" },
+      {
+        property: "og:type",
+        content: "website",
+      },
       {
         name: "twitter:card",
         content: "summary_large_image",
@@ -66,11 +68,22 @@ const COLORS = {
   olive: "#7A8450",
 };
 
+const IFOOD_URL =
+  "https://www.ifood.com.br/delivery/belo-horizonte-mg/anna-cafe-bistro-by-chocolatum-prado/feb17ffc-a570-4286-9fb6-6569fa841ada";
+
 const whatsapp = "https://wa.me/5531999022466";
+
 const instagram =
   "https://www.instagram.com/annacafebistro_bychocolatum";
+
 const maps =
   "https://www.google.com/maps/search/?api=1&query=R.%20Turquesa%2C%20953%20-%20Prado%2C%20Belo%20Horizonte%20-%20MG";
+
+const googleReviews =
+  "https://www.google.com/maps/search/?api=1&query=Anna%20Caf%C3%A9%20Bistro%20by%20Chocolatum";
+
+const FALLBACK_MENU_IMAGE =
+  "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80";
 
 const heroImage =
   "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1400&q=90";
@@ -82,22 +95,26 @@ const images = [
     className: "row-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85",
+    src:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85",
     alt: "Café servido em ambiente acolhedor",
     className: "",
   },
   {
-    src: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85",
+    src:
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85",
     alt: "Bolo artesanal",
     className: "",
   },
   {
-    src: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85",
+    src:
+      "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85",
     alt: "Confeitaria artesanal",
     className: "",
   },
   {
-    src: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85",
+    src:
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85",
     alt: "Pães e quitandas artesanais",
     className: "",
   },
@@ -105,7 +122,8 @@ const images = [
 
 const reviews = [
   {
-    text: "Lugar point, comidas e sobremesas maravilhosas e o biscoito frito de vó, meu Deus! Voltarei e indicarei muito.",
+    text:
+      "Lugar point, comidas e sobremesas maravilhosas e o biscoito frito de vó, meu Deus! Voltarei e indicarei muito.",
     author: "Paulo E.",
   },
   {
@@ -113,7 +131,8 @@ const reviews = [
     author: "Carol L.",
   },
   {
-    text: "Uma delícia de lugar, o espaço é uma graça! Pedimos um pastel de massa de coxinha com recheio de alho-poró, bacon e quatro queijos, frito na hora.",
+    text:
+      "Uma delícia de lugar, o espaço é uma graça! Pedimos um pastel de massa de coxinha com recheio de alho-poró, bacon e quatro queijos, frito na hora.",
     author: "Isabela R.",
     detail: "Local Guide",
   },
@@ -131,7 +150,7 @@ const menuData = {
         "Fatias e preparos artesanais para acompanhar aquele café sem pressa.",
       tag: "Feito com carinho",
       image:
-        "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Bolo de pote",
@@ -139,7 +158,7 @@ const menuData = {
         "Uma opção delicada para adoçar a pausa e levar um pouco da casa com você.",
       tag: "Docinho da casa",
       image:
-        "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Sobremesas",
@@ -147,9 +166,10 @@ const menuData = {
         "Doces pensados para transformar uma refeição em memória.",
       tag: "Queridinhas",
       image:
-        "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80",
     },
   ],
+
   Salgados: [
     {
       title: "Pastel de massa de coxinha",
@@ -157,7 +177,7 @@ const menuData = {
         "Alho-poró, bacon e quatro queijos, frito na hora.",
       tag: "Queridinho da casa",
       image:
-        "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Biscoito frito de vó",
@@ -165,9 +185,10 @@ const menuData = {
         "Uma lembrança afetiva com gosto de quintal e cozinha mineira.",
       tag: "Memória afetiva",
       image:
-        "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80",
     },
   ],
+
   Almoço: [
     {
       title: "Prato do dia",
@@ -175,7 +196,7 @@ const menuData = {
         "Preparos de almoço para quem quer comida gostosa e uma pausa acolhedora.",
       tag: "Almoço",
       image:
-        "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Sabores da casa",
@@ -183,9 +204,10 @@ const menuData = {
         "Uma cozinha com espaço para refeições que convidam a voltar.",
       tag: "Confira no dia",
       image:
-        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
     },
   ],
+
   Cafés: [
     {
       title: "Café especial",
@@ -193,7 +215,7 @@ const menuData = {
         "Acompanhamento perfeito para doces, conversas e momentos tranquilos.",
       tag: "Café",
       image:
-        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Café & companhia",
@@ -201,7 +223,7 @@ const menuData = {
         "Uma pausa gostosa no coração do Prado.",
       tag: "Momento Anna",
       image:
-        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=85",
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80",
     },
   ],
 };
@@ -227,11 +249,45 @@ function Reveal({
 
 function Stars({ small = false }: { small?: boolean }) {
   return (
-    <div className={`flex gap-1 ${small ? "text-sm" : "text-base"}`}>
+    <div
+      className={`flex gap-1 ${small ? "text-sm" : "text-base"}`}
+      aria-label="5 estrelas"
+    >
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} size={small ? 13 : 16} fill="currentColor" />
+        <Star
+          key={i}
+          size={small ? 13 : 16}
+          fill="currentColor"
+        />
       ))}
     </div>
+  );
+}
+
+function IfoodButton({
+  children = "Pedir no iFood",
+  className = "",
+  compact = false,
+}: {
+  children?: ReactNode;
+  className?: string;
+  compact?: boolean;
+}) {
+  return (
+    <a
+      href={IFOOD_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Pedir no iFood — Anna Café Bistro"
+      className={`anna-ifood-pulse inline-flex items-center justify-center gap-2 rounded-full bg-[#EA1D2C] font-bold uppercase tracking-[0.11em] text-white shadow-[0_12px_30px_rgba(234,29,44,.24)] transition-all hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(234,29,44,.34)] ${
+        compact
+          ? "px-4 py-2.5 text-[9px]"
+          : "px-6 py-4 text-[10px]"
+      } ${className}`}
+    >
+      <ShoppingBag size={compact ? 14 : 16} />
+      {children}
+    </a>
   );
 }
 
@@ -301,11 +357,16 @@ function AnnaCafePage() {
         document.documentElement.scrollHeight - window.innerHeight;
 
       setScrollProgress(
-        scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0,
+        scrollable > 0
+          ? (window.scrollY / scrollable) * 100
+          : 0,
       );
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
+
     onScroll();
 
     return () => {
@@ -316,35 +377,66 @@ function AnnaCafePage() {
 
   useEffect(() => {
     const interval = window.setInterval(() => {
-      setReviewIndex((current) => (current + 1) % reviews.length);
+      setReviewIndex(
+        (current) => (current + 1) % reviews.length,
+      );
     }, 5500);
 
     return () => window.clearInterval(interval);
   }, []);
 
+  /*
+   * IMPORTANTE:
+   * O observer agora depende também de menuTab.
+   * Isso corrige o problema em que os cards das outras abas
+   * ficavam com opacity: 0 depois de trocar de categoria.
+   */
   useEffect(() => {
-    const revealElements = document.querySelectorAll(".anna-reveal");
+    const revealElements =
+      document.querySelectorAll(".anna-reveal");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("anna-visible");
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12 },
+      {
+        threshold: 0.08,
+      },
     );
 
-    revealElements.forEach((element) => observer.observe(element));
+    revealElements.forEach((element) =>
+      observer.observe(element),
+    );
 
     return () => observer.disconnect();
-  }, [loading]);
+  }, [loading, menuTab]);
 
-  const activeItems = useMemo(() => menuData[menuTab], [menuTab]);
+  /*
+   * Pré-carrega todas as imagens do cardápio.
+   * Assim, ao trocar de aba, as imagens já estarão disponíveis.
+   */
+  useEffect(() => {
+    Object.values(menuData)
+      .flat()
+      .forEach((item) => {
+        const image = new Image();
+        image.src = item.image;
+      });
+  }, []);
+
+  const activeItems = useMemo(
+    () => menuData[menuTab],
+    [menuTab],
+  );
 
   const scrollTo = (id: string) => {
     setMobileMenu(false);
+
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -365,6 +457,7 @@ function AnnaCafePage() {
             <p className="font-serif text-3xl text-[#FFF8F0]">
               Anna Café Bistro
             </p>
+
             <p className="mt-1 text-[9px] uppercase tracking-[0.4em] text-[#C98B4B]">
               by Chocolatum
             </p>
@@ -395,7 +488,7 @@ function AnnaCafePage() {
           } as CSSProperties
         }
       >
-        {/* Scroll progress */}
+        {/* SCROLL PROGRESS */}
         <div
           className="fixed left-0 top-0 z-[100] h-[3px] bg-[#C98B4B] shadow-[0_0_12px_rgba(201,139,75,.7)]"
           style={{ width: `${scrollProgress}%` }}
@@ -409,15 +502,16 @@ function AnnaCafePage() {
               : "bg-transparent"
           }`}
         >
-          <div className="mx-auto flex h-[78px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
+          <div className="mx-auto flex h-[78px] max-w-7xl items-center justify-between gap-3 px-5 sm:px-8 lg:px-10">
             <button
               onClick={() => scrollTo("inicio")}
-              className="group text-left"
+              className="group shrink-0 text-left"
               aria-label="Ir para o início"
             >
               <div className="font-serif text-[21px] leading-none text-[#3B2218]">
                 Anna Café Bistro
               </div>
+
               <div className="mt-1 text-[8px] font-semibold uppercase tracking-[0.38em] text-[#C98B4B]">
                 by Chocolatum
               </div>
@@ -434,7 +528,7 @@ function AnnaCafePage() {
               ].map(([label, id]) => (
                 <button
                   key={id}
-                  onClick={() => scrollTo(id!)}
+                  onClick={() => scrollTo(id)}
                   className="relative text-[11px] font-semibold uppercase tracking-[0.12em] text-[#3B2218]/70 transition-colors hover:text-[#C98B4B]"
                 >
                   {label}
@@ -442,23 +536,36 @@ function AnnaCafePage() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* iFood fica visível também no mobile */}
+              <IfoodButton compact className="sm:px-5 sm:py-3" />
+
               <a
                 href={whatsapp}
                 target="_blank"
-                rel="noreferrer"
-                className="hidden items-center gap-2 rounded-full bg-[#C98B4B] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.13em] text-white shadow-[0_10px_25px_rgba(201,139,75,.22)] transition-all hover:-translate-y-0.5 hover:shadow-[0_15px_35px_rgba(201,139,75,.32)] sm:flex"
+                rel="noopener noreferrer"
+                aria-label="Falar com Anna Café Bistro pelo WhatsApp"
+                className="hidden items-center gap-2 rounded-full border border-[#3B2218]/12 bg-white/50 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.13em] text-[#3B2218] transition-all hover:-translate-y-0.5 hover:bg-white sm:flex"
               >
                 <MessageCircle size={14} />
-                Pedir no WhatsApp
+                WhatsApp
               </a>
 
               <button
                 onClick={() => setMobileMenu(!mobileMenu)}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-[#3B2218]/10 bg-white/50 lg:hidden"
-                aria-label="Abrir menu"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#3B2218]/10 bg-white/50 lg:hidden"
+                aria-label={
+                  mobileMenu
+                    ? "Fechar menu"
+                    : "Abrir menu"
+                }
+                aria-expanded={mobileMenu}
               >
-                {mobileMenu ? <X size={20} /> : <Menu size={20} />}
+                {mobileMenu ? (
+                  <X size={20} />
+                ) : (
+                  <Menu size={20} />
+                )}
               </button>
             </div>
           </div>
@@ -476,21 +583,24 @@ function AnnaCafePage() {
                 ].map(([label, id]) => (
                   <button
                     key={id}
-                    onClick={() => scrollTo(id!)}
+                    onClick={() => scrollTo(id)}
                     className="border-b border-[#3B2218]/7 py-4 text-left text-sm font-medium"
                   >
                     {label}
                   </button>
                 ))}
 
+                <IfoodButton className="mt-4 w-full py-4" />
+
                 <a
                   href={whatsapp}
                   target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-full bg-[#C98B4B] py-4 text-xs font-bold uppercase tracking-wider text-white"
+                  rel="noopener noreferrer"
+                  aria-label="Falar com Anna Café Bistro pelo WhatsApp"
+                  className="mt-3 flex items-center justify-center gap-2 rounded-full border border-[#3B2218]/12 py-4 text-xs font-bold uppercase tracking-wider text-[#3B2218]"
                 >
                   <MessageCircle size={16} />
-                  Pedir no WhatsApp
+                  WhatsApp
                 </a>
               </div>
             </div>
@@ -534,6 +644,7 @@ function AnnaCafePage() {
                 <Reveal>
                   <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#C98B4B]/25 bg-white/45 px-4 py-2 backdrop-blur-md">
                     <span className="h-2 w-2 animate-pulse rounded-full bg-[#7A8450]" />
+
                     <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#6B4226]">
                       Prado · Belo Horizonte
                     </span>
@@ -556,14 +667,18 @@ function AnnaCafePage() {
 
                 <Reveal delay={160}>
                   <p className="mt-7 max-w-xl text-sm leading-7 text-[#6B4226]/75 sm:text-base">
-                    Confeitaria, café e bistrô no coração do Prado, em Belo
-                    Horizonte. Um cantinho para comer bem, conversar e criar
-                    memórias.
+                    Confeitaria, café e bistrô no coração do Prado,
+                    em Belo Horizonte. Um cantinho para comer bem,
+                    conversar e criar memórias.
                   </p>
                 </Reveal>
 
                 <Reveal delay={240}>
                   <div className="mt-8 flex flex-wrap gap-3">
+                    <IfoodButton>
+                      Pedir pelo iFood
+                    </IfoodButton>
+
                     <button
                       onClick={() => scrollTo("cardapio")}
                       className="group flex items-center gap-3 rounded-full bg-[#3B2218] px-6 py-4 text-xs font-bold uppercase tracking-[0.12em] text-white shadow-[0_18px_40px_rgba(59,34,24,.18)] transition-all hover:-translate-y-1"
@@ -578,7 +693,7 @@ function AnnaCafePage() {
                     <a
                       href={maps}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="flex items-center gap-3 rounded-full border border-[#3B2218]/15 bg-white/35 px-6 py-4 text-xs font-bold uppercase tracking-[0.12em] text-[#3B2218] backdrop-blur-md transition-all hover:-translate-y-1 hover:bg-white/70"
                     >
                       <Navigation size={14} />
@@ -593,10 +708,12 @@ function AnnaCafePage() {
                       <div className="text-[#C98B4B]">
                         <Stars small />
                       </div>
+
                       <div>
                         <p className="font-serif text-xl leading-none text-[#3B2218]">
                           5,0
                         </p>
+
                         <p className="mt-1 text-[8px] font-bold uppercase tracking-[0.14em] text-[#6B4226]/60">
                           no Google
                         </p>
@@ -606,7 +723,8 @@ function AnnaCafePage() {
                     <div className="hidden h-8 w-px bg-[#3B2218]/10 sm:block" />
 
                     <p className="hidden max-w-[180px] text-[11px] leading-5 text-[#6B4226]/60 sm:block">
-                      Um café charmoso com sabor de cozinha afetiva mineira.
+                      Um café charmoso com sabor de cozinha
+                      afetiva mineira.
                     </p>
                   </div>
                 </Reveal>
@@ -632,10 +750,17 @@ function AnnaCafePage() {
 
                   <div className="anna-float absolute left-0 top-[18%] flex items-center gap-3 rounded-2xl border border-white/60 bg-white/75 px-4 py-3 shadow-[0_20px_45px_rgba(59,34,24,.12)] backdrop-blur-xl">
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E8B4B8]/35 text-[#6B4226]">
-                      <Heart size={16} fill="currentColor" />
+                      <Heart
+                        size={16}
+                        fill="currentColor"
+                      />
                     </div>
+
                     <div>
-                      <p className="font-serif text-sm">Feito com carinho</p>
+                      <p className="font-serif text-sm">
+                        Feito com carinho
+                      </p>
+
                       <p className="text-[8px] uppercase tracking-wider text-[#6B4226]/55">
                         todos os dias
                       </p>
@@ -643,9 +768,16 @@ function AnnaCafePage() {
                   </div>
 
                   <div className="anna-float-delayed absolute bottom-[13%] right-0 flex items-center gap-3 rounded-2xl border border-white/60 bg-[#3B2218]/95 px-4 py-3 text-white shadow-[0_20px_45px_rgba(59,34,24,.2)] backdrop-blur-xl">
-                    <Coffee size={18} className="text-[#C98B4B]" />
+                    <Coffee
+                      size={18}
+                      className="text-[#C98B4B]"
+                    />
+
                     <div>
-                      <p className="font-serif text-sm">Café & aconchego</p>
+                      <p className="font-serif text-sm">
+                        Café & aconchego
+                      </p>
+
                       <p className="text-[8px] uppercase tracking-wider text-white/45">
                         Prado · BH
                       </p>
@@ -666,6 +798,7 @@ function AnnaCafePage() {
               <span className="text-[8px] font-bold uppercase tracking-[0.3em]">
                 Descubra
               </span>
+
               <span className="anna-scroll-mouse flex h-9 w-6 items-start justify-center rounded-full border border-[#6B4226]/25 p-1.5">
                 <span className="h-1.5 w-1 rounded-full bg-[#C98B4B]" />
               </span>
@@ -693,7 +826,9 @@ function AnnaCafePage() {
                     className="flex items-center gap-8 font-serif text-xl italic text-[#FFF8F0]/90 sm:text-2xl"
                   >
                     {item}
-                    <span className="text-[#C98B4B]">✦</span>
+                    <span className="text-[#C98B4B]">
+                      ✦
+                    </span>
                   </span>
                 )),
               )}
@@ -701,7 +836,10 @@ function AnnaCafePage() {
           </section>
 
           {/* SOBRE */}
-          <section id="sobre" className="relative overflow-hidden py-24 sm:py-32">
+          <section
+            id="sobre"
+            className="relative overflow-hidden py-24 sm:py-32"
+          >
             <div className="absolute right-[-100px] top-24 h-80 w-80 rounded-full bg-[#E8B4B8]/20 blur-3xl" />
 
             <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:px-10">
@@ -716,7 +854,10 @@ function AnnaCafePage() {
                     />
 
                     <div className="absolute -bottom-4 -right-5 rounded-2xl bg-[#C98B4B] px-5 py-4 text-white shadow-xl">
-                      <p className="font-serif text-2xl">Anna</p>
+                      <p className="font-serif text-2xl">
+                        Anna
+                      </p>
+
                       <p className="text-[8px] uppercase tracking-[.25em] text-white/65">
                         Café Bistro
                       </p>
@@ -732,7 +873,10 @@ function AnnaCafePage() {
                     />
 
                     <div className="absolute bottom-8 left-[-20px] flex h-20 w-20 -rotate-6 items-center justify-center rounded-full border border-[#C98B4B]/20 bg-[#FFF8F0] shadow-lg">
-                      <Leaf size={24} className="text-[#7A8450]" />
+                      <Leaf
+                        size={24}
+                        className="text-[#7A8450]"
+                      />
                     </div>
                   </div>
                 </div>
@@ -747,18 +891,22 @@ function AnnaCafePage() {
 
                 <Reveal delay={100}>
                   <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-7 text-[#6B4226]/70 lg:text-left">
-                    O Anna Café Bistro - by Chocolatum combina o carinho da
-                    confeitaria com o clima acolhedor de um bistrô. Entre
-                    bolos, cafés, sobremesas e pratos de almoço, aparecem
-                    sabores que lembram casa, família e aquelas receitas que
-                    fazem a gente querer voltar.
+                    O Anna Café Bistro - by Chocolatum combina o
+                    carinho da confeitaria com o clima acolhedor de
+                    um bistrô. Entre bolos, cafés, sobremesas e
+                    pratos de almoço, aparecem sabores que lembram
+                    casa, família e aquelas receitas que fazem a
+                    gente querer voltar.
                   </p>
                 </Reveal>
 
                 <Reveal delay={180}>
                   <div className="mt-10 grid grid-cols-3 divide-x divide-[#3B2218]/10 rounded-3xl border border-[#3B2218]/8 bg-white/40 py-6">
                     <div className="px-3 text-center">
-                      <p className="font-serif text-3xl text-[#C98B4B]">5,0</p>
+                      <p className="font-serif text-3xl text-[#C98B4B]">
+                        5,0
+                      </p>
+
                       <p className="mt-1 text-[8px] font-bold uppercase tracking-wider text-[#6B4226]/55">
                         avaliação
                       </p>
@@ -768,13 +916,17 @@ function AnnaCafePage() {
                       <p className="font-serif text-2xl text-[#C98B4B]">
                         carinho
                       </p>
+
                       <p className="mt-1 text-[8px] font-bold uppercase tracking-wider text-[#6B4226]/55">
                         em cada detalhe
                       </p>
                     </div>
 
                     <div className="px-3 text-center">
-                      <p className="font-serif text-3xl text-[#C98B4B]">+</p>
+                      <p className="font-serif text-3xl text-[#C98B4B]">
+                        +
+                      </p>
+
                       <p className="mt-1 text-[8px] font-bold uppercase tracking-wider text-[#6B4226]/55">
                         sabores para provar
                       </p>
@@ -791,7 +943,7 @@ function AnnaCafePage() {
             className="relative overflow-hidden bg-[#F2E4D4] py-24 sm:py-32"
           >
             <div className="absolute left-[-120px] top-20 h-80 w-80 rounded-full bg-[#E8B4B8]/20 blur-3xl" />
-            <div className="absolute right-[-100px] bottom-0 h-96 w-96 rounded-full bg-[#C98B4B]/10 blur-3xl" />
+            <div className="absolute bottom-0 right-[-100px] h-96 w-96 rounded-full bg-[#C98B4B]/10 blur-3xl" />
 
             <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
               <SectionHeading
@@ -820,16 +972,41 @@ function AnnaCafePage() {
                 </div>
               </Reveal>
 
-              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {/*
+                KEY IMPORTANTE:
+                Quando menuTab muda, este bloco inteiro é remontado.
+                Isso impede o Reveal antigo de deixar os novos cards
+                presos em opacity: 0.
+              */}
+              <div
+                key={menuTab}
+                className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+              >
                 {activeItems.map((item, index) => (
-                  <Reveal key={item.title} delay={index * 80}>
+                  <Reveal
+                    key={`${menuTab}-${item.title}`}
+                    delay={index * 80}
+                  >
                     <article className="group overflow-hidden rounded-[28px] border border-[#3B2218]/8 bg-[#FFF8F0] shadow-[0_15px_45px_rgba(59,34,24,.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_65px_rgba(59,34,24,.13)]">
-                      <div className="relative aspect-[1.18] overflow-hidden">
+                      <div className="relative aspect-[4/3] overflow-hidden">
                         <img
-                          src={item.image}
+                          src={
+                            item.image ||
+                            FALLBACK_MENU_IMAGE
+                          }
                           alt={`${item.title} — imagem ilustrativa`}
                           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          loading="lazy"
+                          loading="eager"
+                          decoding="async"
+                          onError={(event) => {
+                            if (
+                              event.currentTarget.src !==
+                              FALLBACK_MENU_IMAGE
+                            ) {
+                              event.currentTarget.src =
+                                FALLBACK_MENU_IMAGE;
+                            }
+                          }}
                         />
 
                         <div className="absolute inset-0 bg-gradient-to-t from-[#3B2218]/30 to-transparent opacity-60" />
@@ -845,7 +1022,7 @@ function AnnaCafePage() {
                             {item.title}
                           </h3>
 
-                          <span className="mt-1 text-[8px] font-bold uppercase tracking-wider text-[#C98B4B]">
+                          <span className="mt-1 shrink-0 text-[8px] font-bold uppercase tracking-wider text-[#C98B4B]">
                             Consulte
                           </span>
                         </div>
@@ -864,15 +1041,53 @@ function AnnaCafePage() {
                 ))}
               </div>
 
+              <div className="mt-10 flex justify-center">
+                <IfoodButton>
+                  Pedir no iFood
+                </IfoodButton>
+              </div>
+
               <p className="mt-8 text-center text-[10px] italic text-[#6B4226]/50">
-                Cardápio ilustrativo da demonstração · itens e disponibilidade
-                devem ser confirmados com o estabelecimento.
+                Cardápio ilustrativo da demonstração · itens e
+                disponibilidade devem ser confirmados com o
+                estabelecimento.
               </p>
             </div>
           </section>
 
+          {/* DELIVERY */}
+          <section className="relative overflow-hidden bg-[#6B4226] py-16 sm:py-20">
+            <div className="absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[#C98B4B]/20 blur-3xl" />
+
+            <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-5 text-center sm:px-8 md:flex-row md:text-left">
+              <div className="max-w-2xl">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#F2D8C5]">
+                  Delivery Anna
+                </p>
+
+                <h2 className="mt-3 font-serif text-4xl leading-tight text-[#FFF8F0] sm:text-5xl">
+                  Bateu a vontade?
+                  <br />
+                  A gente leva até você.
+                </h2>
+
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/70">
+                  Peça seus favoritos do Anna Café Bistro pelo
+                  iFood e receba no conforto de onde estiver.
+                </p>
+              </div>
+
+              <IfoodButton className="shrink-0 px-7 py-4">
+                Pedir no iFood
+              </IfoodButton>
+            </div>
+          </section>
+
           {/* AMBIENTE */}
-          <section id="ambiente" className="py-24 sm:py-32">
+          <section
+            id="ambiente"
+            className="py-24 sm:py-32"
+          >
             <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
               <SectionHeading
                 eyebrow="O ambiente"
@@ -919,7 +1134,8 @@ function AnnaCafePage() {
               </div>
 
               <p className="mt-3 text-center text-[9px] uppercase tracking-wider text-[#6B4226]/40">
-                Imagens ilustrativas · substituir pelas fotos reais da casa
+                Imagens ilustrativas · substituir pelas fotos reais
+                da casa
               </p>
             </div>
           </section>
@@ -952,17 +1168,17 @@ function AnnaCafePage() {
                     </div>
 
                     <p className="mt-8 font-serif text-2xl leading-relaxed text-[#FFF8F0] sm:text-4xl">
-                      “{reviews[reviewIndex]!.text}”
+                      “{reviews[reviewIndex].text}”
                     </p>
 
                     <div className="mt-8">
                       <p className="text-sm font-semibold text-white/90">
-                        {reviews[reviewIndex]!.author}
+                        {reviews[reviewIndex].author}
                       </p>
 
-                      {reviews[reviewIndex]!.detail && (
+                      {reviews[reviewIndex].detail && (
                         <p className="mt-1 text-[9px] uppercase tracking-[.2em] text-[#C98B4B]">
-                          {reviews[reviewIndex]!.detail}
+                          {reviews[reviewIndex].detail}
                         </p>
                       )}
                     </div>
@@ -972,7 +1188,9 @@ function AnnaCafePage() {
                     {reviews.map((review, index) => (
                       <button
                         key={review.author}
-                        onClick={() => setReviewIndex(index)}
+                        onClick={() =>
+                          setReviewIndex(index)
+                        }
                         aria-label={`Avaliação ${index + 1}`}
                         className={`h-1.5 rounded-full transition-all ${
                           index === reviewIndex
@@ -987,7 +1205,8 @@ function AnnaCafePage() {
                     <button
                       onClick={() =>
                         setReviewIndex(
-                          (reviewIndex - 1 + reviews.length) % reviews.length,
+                          (reviewIndex - 1 + reviews.length) %
+                            reviews.length,
                         )
                       }
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/70 transition hover:bg-white/10 hover:text-white"
@@ -998,7 +1217,10 @@ function AnnaCafePage() {
 
                     <button
                       onClick={() =>
-                        setReviewIndex((reviewIndex + 1) % reviews.length)
+                        setReviewIndex(
+                          (reviewIndex + 1) %
+                            reviews.length,
+                        )
                       }
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/70 transition hover:bg-white/10 hover:text-white"
                       aria-label="Próxima avaliação"
@@ -1011,12 +1233,16 @@ function AnnaCafePage() {
 
               <div className="mt-8 flex justify-center">
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Anna%20Caf%C3%A9%20Bistro%20by%20Chocolatum"
+                  href={googleReviews}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-[9px] font-bold uppercase tracking-[.18em] text-white/70 transition hover:bg-white/10 hover:text-white"
                 >
-                  <Star size={13} fill="#C98B4B" className="text-[#C98B4B]" />
+                  <Star
+                    size={13}
+                    fill="#C98B4B"
+                    className="text-[#C98B4B]"
+                  />
                   Avaliações reais do Google
                   <ExternalLink size={12} />
                 </a>
@@ -1025,7 +1251,10 @@ function AnnaCafePage() {
           </section>
 
           {/* CONTATO */}
-          <section id="contato" className="relative overflow-hidden py-24 sm:py-32">
+          <section
+            id="contato"
+            className="relative overflow-hidden py-24 sm:py-32"
+          >
             <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
               <SectionHeading
                 eyebrow="Venha conhecer"
@@ -1053,6 +1282,7 @@ function AnnaCafePage() {
                           <p className="text-[9px] font-bold uppercase tracking-wider text-[#6B4226]/45">
                             Endereço
                           </p>
+
                           <p className="mt-1 text-sm leading-6 text-[#3B2218]">
                             R. Turquesa, 953 - Prado
                             <br />
@@ -1070,10 +1300,11 @@ function AnnaCafePage() {
                           <p className="text-[9px] font-bold uppercase tracking-wider text-[#6B4226]/45">
                             WhatsApp
                           </p>
+
                           <a
                             href={whatsapp}
                             target="_blank"
-                            rel="noreferrer"
+                            rel="noopener noreferrer"
                             className="mt-1 block text-sm text-[#3B2218] hover:text-[#C98B4B]"
                           >
                             (31) 99902-2466
@@ -1090,6 +1321,7 @@ function AnnaCafePage() {
                           <p className="text-[9px] font-bold uppercase tracking-wider text-[#6B4226]/45">
                             Horário
                           </p>
+
                           <p className="mt-1 text-sm text-[#3B2218]">
                             Aberto todos os dias até 22h30*
                           </p>
@@ -1097,21 +1329,26 @@ function AnnaCafePage() {
                       </div>
                     </div>
 
-                    <div className="mt-9 grid gap-3 sm:grid-cols-2">
+                    {/* iFood primeiro */}
+                    <div className="mt-9">
+                      <IfoodButton className="w-full py-4" />
+                    </div>
+
+                    <div className="mt-3 grid gap-3 sm:grid-cols-2">
                       <a
                         href={whatsapp}
                         target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center justify-center gap-2 rounded-full bg-[#C98B4B] px-5 py-4 text-[10px] font-bold uppercase tracking-wider text-white transition hover:-translate-y-0.5 hover:shadow-xl"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 rounded-full border border-[#3B2218]/12 px-5 py-4 text-[10px] font-bold uppercase tracking-wider text-[#3B2218] transition hover:-translate-y-0.5 hover:bg-[#FFF8F0]"
                       >
                         <MessageCircle size={15} />
-                        Chamar no WhatsApp
+                        WhatsApp
                       </a>
 
                       <a
                         href={maps}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2 rounded-full border border-[#3B2218]/12 px-5 py-4 text-[10px] font-bold uppercase tracking-wider text-[#3B2218] transition hover:-translate-y-0.5 hover:bg-[#FFF8F0]"
                       >
                         <Navigation size={15} />
@@ -1122,7 +1359,7 @@ function AnnaCafePage() {
                     <a
                       href={instagram}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="mt-3 flex items-center justify-center gap-2 rounded-full border border-[#3B2218]/12 px-5 py-4 text-[10px] font-bold uppercase tracking-wider text-[#3B2218] transition hover:bg-[#FFF8F0]"
                     >
                       <Instagram size={15} />
@@ -1130,8 +1367,8 @@ function AnnaCafePage() {
                     </a>
 
                     <p className="mt-6 text-[9px] leading-5 text-[#6B4226]/45">
-                      * Horários completos devem ser confirmados com o
-                      estabelecimento.
+                      * Horários completos devem ser confirmados com
+                      o estabelecimento.
                     </p>
                   </div>
                 </div>
@@ -1147,7 +1384,11 @@ function AnnaCafePage() {
 
                   <div className="pointer-events-none absolute left-5 top-5 rounded-2xl bg-[#FFF8F0]/90 px-4 py-3 shadow-xl backdrop-blur-md">
                     <div className="flex items-center gap-2">
-                      <MapPin size={14} className="text-[#C98B4B]" />
+                      <MapPin
+                        size={14}
+                        className="text-[#C98B4B]"
+                      />
+
                       <span className="text-[9px] font-bold uppercase tracking-wider text-[#3B2218]">
                         Prado · Belo Horizonte
                       </span>
@@ -1166,21 +1407,24 @@ function AnnaCafePage() {
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-10 md:grid-cols-[1.4fr_.8fr_.8fr]">
               <div>
-                <p className="font-serif text-3xl">Anna Café Bistro</p>
+                <p className="font-serif text-3xl">
+                  Anna Café Bistro
+                </p>
+
                 <p className="mt-2 text-[9px] font-semibold uppercase tracking-[.38em] text-[#C98B4B]">
                   by Chocolatum
                 </p>
 
                 <p className="mt-6 max-w-sm text-sm leading-6 text-white/50">
-                  Confeitaria, café e bistrô com aquele aconchego que faz a
-                  gente querer ficar mais um pouquinho.
+                  Confeitaria, café e bistrô com aquele aconchego
+                  que faz a gente querer ficar mais um pouquinho.
                 </p>
 
                 <div className="mt-6 flex gap-2">
                   <a
                     href={instagram}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/60 transition hover:bg-white/10 hover:text-white"
                     aria-label="Instagram"
                   >
@@ -1190,11 +1434,21 @@ function AnnaCafePage() {
                   <a
                     href={whatsapp}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/60 transition hover:bg-white/10 hover:text-white"
                     aria-label="WhatsApp"
                   >
                     <MessageCircle size={16} />
+                  </a>
+
+                  <a
+                    href={IFOOD_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EA1D2C] text-white transition hover:-translate-y-0.5"
+                    aria-label="Pedir no iFood"
+                  >
+                    <ShoppingBag size={16} />
                   </a>
                 </div>
               </div>
@@ -1203,11 +1457,22 @@ function AnnaCafePage() {
                 <p className="text-[9px] font-bold uppercase tracking-[.2em] text-[#C98B4B]">
                   Visite
                 </p>
+
                 <p className="mt-4 text-sm leading-6 text-white/55">
                   R. Turquesa, 953
                   <br />
                   Prado, Belo Horizonte - MG
                 </p>
+
+                <a
+                  href={IFOOD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-white/65 transition hover:text-white"
+                >
+                  <ShoppingBag size={14} />
+                  Pedir no iFood
+                </a>
               </div>
 
               <div>
@@ -1224,7 +1489,7 @@ function AnnaCafePage() {
                   ].map(([label, id]) => (
                     <button
                       key={id}
-                      onClick={() => scrollTo(id!)}
+                      onClick={() => scrollTo(id)}
                       className="text-left text-sm text-white/50 transition hover:text-white"
                     >
                       {label}
@@ -1235,23 +1500,40 @@ function AnnaCafePage() {
             </div>
 
             <div className="mt-14 flex flex-col justify-between gap-4 border-t border-white/8 pt-6 text-[9px] uppercase tracking-wider text-white/30 sm:flex-row">
-              <span>Feito com carinho em Belo Horizonte ♥</span>
+              <span>
+                Feito com carinho em Belo Horizonte ♥
+              </span>
+
               <span>Demonstração de design</span>
             </div>
           </div>
         </footer>
 
-        {/* WHATSAPP FLOAT */}
-        <a
-          href={whatsapp}
-          target="_blank"
-          rel="noreferrer"
-          className="anna-whatsapp fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#7A8450] text-white shadow-[0_12px_35px_rgba(122,132,80,.35)] transition-transform hover:scale-110 sm:bottom-7 sm:right-7"
-          aria-label="Falar com Anna Café Bistro pelo WhatsApp"
-        >
-          <MessageCircle size={23} />
-          <span className="absolute inset-0 rounded-full border-2 border-[#7A8450] opacity-40" />
-        </a>
+        {/* FLOATING BUTTONS */}
+        <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 sm:bottom-7 sm:right-7">
+          <a
+            href={IFOOD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="anna-ifood-float flex h-14 items-center gap-2 rounded-full bg-[#EA1D2C] px-5 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_12px_35px_rgba(234,29,44,.32)] transition-transform hover:scale-105"
+            aria-label="Pedir no iFood — Anna Café Bistro"
+          >
+            <ShoppingBag size={20} />
+            <span className="hidden sm:inline">
+              Pedir no iFood
+            </span>
+          </a>
+
+          <a
+            href={whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="anna-whatsapp flex h-12 w-12 items-center justify-center rounded-full bg-[#7A8450] text-white shadow-[0_12px_35px_rgba(122,132,80,.35)] transition-transform hover:scale-110"
+            aria-label="Falar com Anna Café Bistro pelo WhatsApp"
+          >
+            <MessageCircle size={21} />
+          </a>
+        </div>
 
         {/* LIGHTBOX */}
         {lightbox !== null && (
@@ -1268,15 +1550,17 @@ function AnnaCafePage() {
             </button>
 
             <img
-              src={images[lightbox]!.src}
-              alt={images[lightbox]!.alt}
+              src={images[lightbox].src}
+              alt={images[lightbox].alt}
               className="max-h-[85vh] max-w-[92vw] rounded-[28px] object-contain shadow-2xl"
-              onClick={(event) => event.stopPropagation()}
+              onClick={(event) =>
+                event.stopPropagation()
+              }
             />
           </div>
         )}
 
-        {/* Structured data */}
+        {/* STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1293,7 +1577,10 @@ function AnnaCafePage() {
                 postalCode: "30850-760",
                 addressCountry: "BR",
               },
-              sameAs: [instagram],
+              sameAs: [
+                instagram,
+                IFOOD_URL,
+              ],
             }),
           }}
         />
@@ -1358,13 +1645,26 @@ const globalStyles = `
   }
 
   @keyframes anna-loader {
-    to { width: 100%; }
+    to {
+      width: 100%;
+    }
   }
 
   @keyframes anna-mark {
-    0% { opacity: 0; transform: scale(.7) rotate(-12deg); }
-    55% { opacity: 1; transform: scale(1.04) rotate(2deg); }
-    100% { opacity: 1; transform: scale(1) rotate(0); }
+    0% {
+      opacity: 0;
+      transform: scale(.7) rotate(-12deg);
+    }
+
+    55% {
+      opacity: 1;
+      transform: scale(1.04) rotate(2deg);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+    }
   }
 
   @keyframes anna-preloader-out {
@@ -1403,6 +1703,7 @@ const globalStyles = `
       transform: translate3d(0,0,0) rotate(0);
       opacity: .25;
     }
+
     50% {
       transform: translate3d(14px,-24px,0) rotate(90deg);
       opacity: .7;
@@ -1417,6 +1718,7 @@ const globalStyles = `
     0%, 100% {
       transform: translateY(0) rotate(0);
     }
+
     50% {
       transform: translateY(-9px) rotate(.4deg);
     }
@@ -1431,8 +1733,13 @@ const globalStyles = `
   }
 
   @keyframes anna-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-9px); }
+    0%, 100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-9px);
+    }
   }
 
   .anna-scroll-mouse {
@@ -1440,8 +1747,13 @@ const globalStyles = `
   }
 
   @keyframes anna-scroll {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
+    0%, 100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(6px);
+    }
   }
 
   .anna-marquee {
@@ -1449,8 +1761,51 @@ const globalStyles = `
   }
 
   @keyframes anna-marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /*
+   * Animação suave exclusiva do iFood.
+   * Usa apenas o vermelho oficial da marca nos botões.
+   */
+  .anna-ifood-pulse {
+    animation: anna-ifood-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes anna-ifood-pulse {
+    0%, 100% {
+      box-shadow:
+        0 12px 30px rgba(234,29,44,.22);
+    }
+
+    50% {
+      box-shadow:
+        0 15px 38px rgba(234,29,44,.42);
+    }
+  }
+
+  .anna-ifood-float {
+    animation: anna-ifood-float 2.8s ease-in-out infinite;
+  }
+
+  @keyframes anna-ifood-float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  .anna-whatsapp {
+    position: relative;
   }
 
   .anna-whatsapp::before {
@@ -1467,6 +1822,7 @@ const globalStyles = `
       transform: scale(.85);
       opacity: .8;
     }
+
     70%, 100% {
       transform: scale(1.25);
       opacity: 0;
@@ -1476,6 +1832,15 @@ const globalStyles = `
   @media (max-width: 640px) {
     .anna-marquee {
       animation-duration: 30s;
+    }
+
+    .anna-ifood-pulse {
+      animation-duration: 2.8s;
+    }
+
+    .anna-ifood-float {
+      padding-left: 14px;
+      padding-right: 14px;
     }
   }
 
