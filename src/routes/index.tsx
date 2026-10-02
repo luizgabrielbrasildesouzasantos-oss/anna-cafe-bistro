@@ -1502,4 +1502,3 @@ const globalStyles = `
 `;
 
 export default AnnaCafePage;
-```
